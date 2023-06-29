@@ -3,6 +3,7 @@ package com.example.spring5recipeapp.services;
 import com.example.spring5recipeapp.commands.RecipeCommand;
 import com.example.spring5recipeapp.converters.RecipeCommandToRecipe;
 import com.example.spring5recipeapp.converters.RecipeToRecipeCommand;
+import com.example.spring5recipeapp.domain.Notes;
 import com.example.spring5recipeapp.domain.Recipe;
 import com.example.spring5recipeapp.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -57,10 +58,43 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @Transactional
     public RecipeCommand saveRecipeCommand(RecipeCommand command) {
-        Recipe detachedRecipe = recipeCommandToRecipe.convert(command);
+        Recipe recipe;
 
-        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+        if (command.getId() != null) {
+            recipe = recipeRepository.findById(command.getId()).orElse(null);
+            if (recipe == null) {
+                throw new RuntimeException("Recipe not found!");
+            }
+            recipe.setDescription(command.getDescription());
+            recipe.setPrepTime(command.getPrepTime());
+            recipe.setCookTime(command.getCookTime());
+            recipe.setServings(command.getServings());
+            recipe.setSource(command.getSource());
+            recipe.setUrl(command.getUrl());
+            recipe.setDirections(command.getDirections());
+            recipe.setDifficulty(command.getDifficulty());
+
+            if (command.getNotes() != null) {
+                Notes notes = recipe.getNotes();
+                if (notes == null) {
+                    notes = new Notes();
+                    notes.setRecipe(recipe);
+                    recipe.setNotes(notes);
+                }
+                notes.setRecipeNotes(command.getNotes().getRecipeNotes());
+            }
+
+        } else {
+            recipe = recipeCommandToRecipe.convert(command);
+        }
+
+        Recipe savedRecipe = recipeRepository.save(recipe);
         log.debug("Saved RecipeId:" + savedRecipe.getId());
         return recipeToRecipeCommand.convert(savedRecipe);
+    }
+
+    @Override
+    public void deleteById(Long idToDelete) {
+        recipeRepository.deleteById(idToDelete);
     }
 }
