@@ -8,6 +8,15 @@
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"
           th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
 
+    <style>
+        .card {
+            margin-bottom: 1.5rem;
+        }
+        .card-title {
+            font-size: 1.25rem;
+        }
+    </style>
+
     <!--    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>-->
 
     <!-- JavaScript -->
@@ -34,7 +43,8 @@
                             <ul>
                                 <li th:remove="all">cat one</li>
                                 <li th:remove="all">cat two</li>
-                                <li th:each="category : ${recipe.categories}" th:text="${category.getDescription()}">cat
+                                <li th:each="category : ${recipe.categories}"
+                                    th:text="${category.getDescription()}">cat
                                     three
                                 </li>
                             </ul>
@@ -79,7 +89,7 @@
                             <h5>URL:</h5>
                         </div>
                         <div class="col-md-3">
-                            <p><a href="#" th:href="${recipe.url}" >View Original</a></p>
+                            <p><a href="#" th:href="${recipe.url}">View Original</a></p>
                         </div>
                     </div>
                 </div>
@@ -97,7 +107,8 @@
                                 <li th:each="ingredient : ${recipe.ingredients}"
                                     th:text="${(ingredient.getAmount() +
                                         ' ' + ingredient.uom.getDescription() +
-                                        ' - ' + ingredient.getDescription())}">1 Teaspoon of Sugar</li>
+                                        ' - ' + ingredient.getDescription())}">1 Teaspoon of Sugar
+                                </li>
                             </ul>
                             </ul>
                         </div>
@@ -111,7 +122,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <p th:text="${recipe.directions}">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                            <p th:text="${recipe.directions}">Lorem ipsum dolor sit amet, consectetuer adipiscing
+                                elit.
+                                Aenean commodo ligula eget
                                 dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
                                 nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
                                 quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
@@ -135,7 +148,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <p th:text="${recipe.notes.recipeNotes}">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                            <p th:text="${recipe.notes.recipeNotes}">Lorem ipsum dolor sit amet, consectetuer
+                                adipiscing
+                                elit. Aenean commodo ligula eget
                                 dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
                                 nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
                                 quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
@@ -152,9 +167,9 @@
                     </div>
                 </div>
             </div>
+            <!--            </div>-->
         </div>
     </div>
-</div>
 </div>
 </body>
 </html>
