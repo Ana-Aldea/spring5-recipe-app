@@ -75,7 +75,14 @@
                             </div>
                             <div class="col-md-3 form-group">
                                 <label>Difficulty:</label>
-                                <select class="form-control">
+                                <select class="form-control" th:field="*{difficulty}">
+                                    <option th:each="difficultyValue : ${T(com.example.spring5recipeapp.domain.Difficulty).values()}"
+                                            th:value="${difficultyValue.name()}"
+                                            th:text="${difficultyValue.name()}"
+                                    >val
+                                    </option>
+                                </select>
+                                <select class="form-control" th:remove="all">
                                     <option>Easy</option>
                                     <option>Medium</option>
                                     <option>Hard</option>
@@ -105,7 +112,7 @@
                                 <h1 class="card-title">Ingredients</h1>
                             </div>
                             <div class="col-md-1">
-                                <a class="btn btn-default" href="#"
+                                <a class="btn btn-light" href="#"
                                    th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
                             </div>
                         </div>
@@ -150,7 +157,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Submit</button>
                 <!-- </div>-->
             </form>
         </div>
