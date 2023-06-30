@@ -15,7 +15,7 @@
         }
 
         .card-title {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
         }
     </style>
 
@@ -105,7 +105,8 @@
                                 <h1 class="card-title">Ingredients</h1>
                             </div>
                             <div class="col-md-1">
-                                <a class="btn btn-default" href="#" role="button">View</a>
+                                <a class="btn btn-default" href="#"
+                                   th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
                             </div>
                         </div>
                     </div>
